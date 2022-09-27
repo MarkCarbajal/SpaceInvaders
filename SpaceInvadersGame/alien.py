@@ -24,7 +24,7 @@ class Alien(Sprite):
 
     alien_explosion_images = [pg.image.load(f'images/explode{n}.png') for n in range(7)]
 
-    def __init__(self, settings, screen, type):
+    def __init__(self, settings, screen, type, sound):
         super().__init__()
         self.screen = screen
         self.settings = settings
@@ -41,7 +41,9 @@ class Alien(Sprite):
                         
         self.timer_normal = Alien.alien_timers[type]              
         self.timer_explosion = Timer(image_list=Alien.alien_explosion_images, is_loop=False)  
-        self.timer = self.timer_normal                                    
+        self.timer = self.timer_normal
+
+        self.sound = sound                                    
 
     def check_edges(self): 
         screen_rect = self.screen.get_rect()
@@ -56,6 +58,7 @@ class Alien(Sprite):
     def update(self): 
         if self.timer == self.timer_explosion and self.timer.is_expired():
             self.kill()
+            self.sound.change_music_speed()
         settings = self.settings
         self.x += (settings.alien_speed_factor * settings.fleet_direction)
         self.rect.x = self.x
@@ -69,8 +72,8 @@ class Alien(Sprite):
 
 
 class Aliens:
-    def __init__(self, game, screen, settings, lasers: Lasers, ship): 
-        self.model_alien = Alien(settings=settings, screen=screen, type=1)
+    def __init__(self, game, screen, settings, lasers: Lasers, ship, sound): 
+        self.model_alien = Alien(settings=settings, screen=screen, type=1, sound=sound)
         self.game = game
         self.sb = game.scoreboard
         self.aliens = Group()
@@ -78,6 +81,7 @@ class Aliens:
         self.screen = screen
         self.settings = settings
         self.ship = ship
+        self.sound = sound
         self.create_fleet()
     def get_number_aliens_x(self, alien_width):
         available_space_x = self.settings.screen_width - 6 * alien_width
@@ -93,7 +97,7 @@ class Aliens:
     def create_alien(self, alien_number, row_number):
         # if row_number > 5: raise ValueError('row number must be less than 6')
         type = row_number // 1    
-        alien = Alien(settings=self.settings, screen=self.screen, type=type)
+        alien = Alien(settings=self.settings, screen=self.screen, type=type, sound=self.sound)
         alien_width = alien.rect.width
 
         alien.x = alien_width + 1 * alien_width * alien_number 
@@ -129,7 +133,7 @@ class Aliens:
         if collisions:
             for alien in collisions:
                 alien.hit()
-            self.sb.increment_score()
+            self.sb.increment_score() 
     def update(self): 
         self.check_fleet_edges()
         self.check_fleet_bottom()
@@ -137,7 +141,7 @@ class Aliens:
         self.check_fleet_empty()
         for alien in self.aliens.sprites():
             if alien.dead:      # set True once the explosion animation has completed
-                alien.remove()
+                alien.remove() 
             alien.update() 
     def draw(self): 
         for alien in self.aliens.sprites(): 

@@ -23,7 +23,7 @@ class Game:
         self.scoreboard = Scoreboard(game=self)  
         self.lasers = Lasers(settings=self.settings)
         self.ship = Ship(game=self, screen=self.screen, settings=self.settings, sound=self.sound, lasers=self.lasers)
-        self.aliens = Aliens(game=self, screen=self.screen, settings=self.settings, lasers=self.lasers, ship=self.ship)
+        self.aliens = Aliens(game=self, screen=self.screen, settings=self.settings, lasers=self.lasers, ship=self.ship, sound=self.sound)
         self.settings.initialize_speed_settings()
 
     def reset(self):
@@ -31,6 +31,7 @@ class Game:
         self.lasers.reset()
         self.ship.reset()
         self.aliens.reset()
+        self.sound.reset()
         # self.scoreboard.reset()
 
     def game_over(self):
