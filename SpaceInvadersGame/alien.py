@@ -64,7 +64,7 @@ class Alien(Sprite):
         if not self.dying:
             self.dying = True 
             self.timer = self.timer_explosion
-            self.sb.increment_score()
+            self.sb.increment_score(self.type)
     def update(self): 
         if self.timer == self.timer_explosion and self.timer.is_expired():
             self.kill()
@@ -115,8 +115,8 @@ class Aliens:
         self.aliens_lasers.reset()
     def create_alien(self, alien_number, row_number):
         # if row_number > 5: raise ValueError('row number must be less than 6')
-        type = row_number // 2     
-        alien = Alien(game=self.game, type=type, sound=self.sound)
+        self.type = row_number // 2     
+        alien = Alien(game=self.game, type=self.type, sound=self.sound)
         alien_width = alien.rect.width
 
         alien.x = alien_width + 1.5 * alien_width * alien_number 

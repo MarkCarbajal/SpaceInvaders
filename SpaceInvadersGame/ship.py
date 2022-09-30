@@ -78,4 +78,5 @@ class Ship(Sprite):
         rect = image.get_rect()
         rect.left, rect.top = self.rect.left, self.rect.top
         self.screen.blit(image, rect)
+        #self.vel = Vector(0,0)                        # alternitve method to ship control
         # self.screen.blit(self.image, self.rect)

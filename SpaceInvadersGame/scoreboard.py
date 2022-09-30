@@ -18,8 +18,10 @@ class Scoreboard:
         self.score_rect = None
         self.prep_score()
 
-    def increment_score(self): 
-        self.score += self.settings.alien_points
+    def increment_score(self, type): 
+        self.score += 50 if type==0 else 0 #self.settings.alien_points
+        self.score += 25 if type==1 else 0
+        self.score += 10 if type==2 else 0
         self.prep_score()
 
     def prep_score(self): 
