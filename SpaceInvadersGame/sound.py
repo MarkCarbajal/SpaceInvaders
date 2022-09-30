@@ -7,7 +7,7 @@ class Sound:
     def __init__(self, bg_music):
         pg.mixer.init()
         pg.mixer.music.load(bg_music)
-        pg.mixer.music.set_volume(0.1)
+        #pg.mixer.music.set_volume(0.5)
         bg_music_2x_sound = pg.mixer.Sound('sounds/startrek2.wav')
         bg_music_3x_sound = pg.mixer.Sound('sounds/startrek3.wav')
         bg_music_4x_sound = pg.mixer.Sound('sounds/startrek4.wav')
@@ -17,7 +17,7 @@ class Sound:
         self.sounds = {'alienlaser': alienlaser_sound, 'photontorpedo': photontorpedo_sound,
                        'gameover': gameover_sound, 'bg_music_2x': bg_music_2x_sound, 
                        'bg_music_3x': bg_music_3x_sound, 'bg_music_4x': bg_music_4x_sound}
-        self.alien_count = 48
+        self.alien_count = 72
 
     def play_bg(self):
         pg.mixer.music.play(-1, 0.0)
@@ -32,19 +32,19 @@ class Sound:
         self.stop_bg() 
         pg.mixer.music.load('sounds/gameover.wav')
         self.play_bg()
-        time.sleep(2.8)
+        time.sleep(4.0)
 
     def change_music_speed(self):
         self.alien_count -= 1
-        if self.alien_count == 12:
+        if self.alien_count == 18:
             self.stop_bg()
             pg.mixer.music.load('sounds/startrek4.wav')
             self.play_bg()
-        if self.alien_count == 24:
+        if self.alien_count == 36:
             self.stop_bg()
             pg.mixer.music.load('sounds/startrek3.wav')
             self.play_bg()
-        if self.alien_count == 36:
+        if self.alien_count == 54:
             self.stop_bg()
             pg.mixer.music.load('sounds/startrek2.wav')
             self.play_bg()
