@@ -8,6 +8,8 @@ from ship import Ship
 from sound import Sound
 from scoreboard import Scoreboard
 from barrier import Barriers
+from game_stats import GameStats
+from button import Button
 import sys
 
 
@@ -30,6 +32,10 @@ class Game:
         self.aliens = Aliens(game=self, sound=self.sound)
         self.settings.initialize_speed_settings()
 
+        self.stats = GameStats(self.settings)
+        self.play_button = Button(self.settings, self.screen, "Play")
+        self.mouse_x, self.mouse_y = pg.mouse.get_pos()
+
     def reset(self):
         print('Resetting game...')
         # self.lasers.reset()
@@ -47,8 +53,14 @@ class Game:
 
     def play(self):
         self.sound.play_bg()
-        while True:     # at the moment, only exits in gf.check_events if Ctrl/Cmd-Q pressed
-            gf.check_events(settings=self.settings, ship=self.ship)
+        while self.stats.game_active == False:  
+            self.play_button.draw_button()
+            gf.check_events(settings=self.settings, ship=self.ship, stats=self.stats, play_button = self.play_button)
+            pg.display.flip()
+
+
+        while self.stats.game_active == True:     # at the moment, only exits in gf.check_events if Ctrl/Cmd-Q pressed
+            gf.check_events(settings=self.settings, ship=self.ship, stats=self.stats, play_button = self.play_button)
             self.screen.fill(self.settings.bg_color)
             self.ship.update()
             self.aliens.update()
