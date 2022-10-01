@@ -6,7 +6,11 @@ import pygame as pg
 from pygame.sprite import Sprite, Group
 from barrier import Barriers
 from laser import Lasers
+from settings import Settings
 from timer import Timer
+import game_functions as gf
+from game_stats import GameStats
+
 
 
 class Alien(Sprite):
@@ -44,6 +48,7 @@ class Alien(Sprite):
         self.x = float(self.rect.x)
         self.type = type
         self.sb = game.scoreboard
+        self.stats = GameStats(self.settings)
         
         self.dying = self.dead = False
 
@@ -177,6 +182,7 @@ class Aliens:
         if collisions:
             for alien in collisions:
                 alien.hit()
+        
 
         collisions = pg.sprite.spritecollide(self.ship, self.aliens_lasers.lasers, True)
         if collisions:

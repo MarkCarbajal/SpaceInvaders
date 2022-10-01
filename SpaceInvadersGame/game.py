@@ -22,7 +22,9 @@ class Game:
         pg.display.set_caption("Alien Invasion")
 
         self.sound = Sound(bg_music="sounds/startrek.wav")
+        self.stats = GameStats(self.settings)
         self.scoreboard = Scoreboard(game=self)  
+        
 
         self.ship_lasers = Lasers(settings=self.settings, type=LaserType.SHIP)
         self.alien_lasers = Lasers(settings=self.settings, type=LaserType.ALIEN)
@@ -32,7 +34,6 @@ class Game:
         self.aliens = Aliens(game=self, sound=self.sound, barriers=self.barriers)
         self.settings.initialize_speed_settings()
 
-        self.stats = GameStats(self.settings)
         self.play_button = Button(self.settings, self.screen, "Play")
         self.mouse_x, self.mouse_y = pg.mouse.get_pos()
 
@@ -43,7 +44,8 @@ class Game:
         self.ship.reset()
         self.aliens.reset()
         self.sound.reset()
-        # self.scoreboard.reset()
+        self.scoreboard.reset()
+
 
     def game_over(self):
         print('All ships gone: game over!')
@@ -68,6 +70,7 @@ class Game:
             # self.lasers.update()
             self.scoreboard.update()
             pg.display.flip()
+
 
 
 def main():

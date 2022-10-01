@@ -5,6 +5,7 @@ from game_functions import clamp
 from vector import Vector
 from sys import exit
 from timer import  Timer
+from scoreboard import Scoreboard
 
 
 class Ship(Sprite):
@@ -23,6 +24,7 @@ class Ship(Sprite):
         self.screen_rect = game.screen.get_rect()
         self.posn = self.center_ship()    # posn is the centerx, bottom of the rect, not left, top
         self.vel = Vector()
+        self.sb = game.scoreboard
 
         # self.lasers = Lasers(settings=self.settings)
         self.lasers = game.ship_lasers
@@ -49,11 +51,15 @@ class Ship(Sprite):
         self.timer = self.timer_normal
         self.timer_explosion.reset()
         self.rect.left, self.rect.top = self.posn.x, self.posn.y
+        #self.sb.reset()
+
     def hit(self):
         if not self.dying:
             print('SHIP IS HIT !!!!!!!!!!!!!!!!!!!!!')
             self.dying = True 
             self.timer = self.timer_explosion
+         
+            
     def really_dead(self):
 # # TODO: reduce the ships_left, 
 # #       reset the game if ships > 0
