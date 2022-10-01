@@ -29,7 +29,7 @@ class Game:
         
         self.barriers = Barriers(game=self)
         self.ship = Ship(game=self)
-        self.aliens = Aliens(game=self, sound=self.sound)
+        self.aliens = Aliens(game=self, sound=self.sound, barriers=self.barriers)
         self.settings.initialize_speed_settings()
 
         self.stats = GameStats(self.settings)

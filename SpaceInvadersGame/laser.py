@@ -22,8 +22,9 @@ class Lasers:
                               x=x, y=y, sound=game.sound, type=self.type))
     def update(self):
         self.lasers.update()
-        for laser in self.lasers.copy():
-            if laser.rect.bottom <= 0: self.lasers.remove(laser)
+        for laser in self.lasers:
+            if laser.rect.bottom <= 0: laser.kill()
+            if laser.rect.bottom >= 800: laser.kill()
     def draw(self):
         for laser in self.lasers.sprites(): laser.draw()
 

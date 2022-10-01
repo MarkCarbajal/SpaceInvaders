@@ -9,10 +9,10 @@ class Settings():
         self.bg_color = (150, 150, 150)
         
 # # TODO: test laser with a really wide laser
-        self.laser_width = 5
-        self.laser_height = 30
+        self.laser_width = 32  #
+        self.laser_height = 32  #
         self.laser_color = 255, 0, 0
-        self.lasers_every = 60           # change to 1 to see faster lasers
+        self.lasers_every = 80           # change to 1 to see faster lasers
 
         self.aliens_shoot_every = 120    # about every 2 seconds at 60 fps
         self.alien_points = 50

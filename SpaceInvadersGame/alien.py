@@ -1,8 +1,10 @@
 from ast import Or
 from email.headerregistry import HeaderRegistry
+from multiprocessing import Barrier
 from random import randint
 import pygame as pg
 from pygame.sprite import Sprite, Group
+from barrier import Barriers
 from laser import Lasers
 from timer import Timer
 
@@ -82,12 +84,13 @@ class Alien(Sprite):
 
 
 class Aliens:
-    def __init__(self, game, sound): 
+    def __init__(self, game, sound, barriers): 
         self.model_alien = Alien(game=game, type=1, sound=sound)
         self.game = game
         self.sb = game.scoreboard
         self.aliens = Group()
         self.sound = sound
+        self.barriers = barriers
 
         # self.ship_lasers = game.ship.lasers.lasers    # a laser Group
         # self.aliens_lasers = Lasers(settings=game.settings)
@@ -178,6 +181,16 @@ class Aliens:
         collisions = pg.sprite.spritecollide(self.ship, self.aliens_lasers.lasers, True)
         if collisions:
             self.ship.hit()
+
+        collisions = pg.sprite.groupcollide(self.barriers.barriers, self.ship_lasers, False, True)  
+        if collisions:
+            for barrier in collisions:
+                barrier.hit()
+
+        collisions = pg.sprite.groupcollide(self.barriers.barriers, self.aliens_lasers.lasers, False, True)  
+        if collisions:
+            for barrier in collisions:
+                barrier.hit()
 
         # aliens_lasers collide with barrier?
 
