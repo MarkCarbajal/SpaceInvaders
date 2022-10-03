@@ -93,10 +93,11 @@ class Ufo(Sprite):
         self.image =  pg.image.load('images/alien__30.png')
 
     def update(self):
-        self.run_count += 1
+        #self.run_count += 1
         #self.rect.x = 0
-        if self.run_at <= self.run_count:
-            self.rect.x += self.speed
+        #if self.run_at <= self.run_count:
+            #self.rect.x += self.speed
+        self.rect.x += self.speed
 
     def blitme(self):
         if self.run_at <= self.run_count:
