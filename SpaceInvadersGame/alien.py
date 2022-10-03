@@ -39,9 +39,15 @@ class Alien(Sprite):
     alien_timers = {0 : Timer(image_list=alien_images0), 
                    1 : Timer(image_list=alien_images1), 
                    2 : Timer(image_list=alien_images2)} 
+<<<<<<< HEAD
                    #3 : Timer(image_list=alien_images3)}    
+=======
+                #    3 : Timer(image_list=alien_images3)}   
+>>>>>>> 9a0e971e113be9b2caf2f9174cb24d10f2b6c5ba
 
-    alien_explosion_images = [pg.image.load(f'images/explode{n}.png') for n in range(7)]
+    alien_explosion_images0 = [pg.image.load(f'images/explode{n}.png') for n in range(7)]
+    alien_explosion_images1 = [pg.image.load(f'images/alien_laser{n}.png') for n in range(9)]
+    alien_explosion_images2 = [pg.image.load(f'images/laser_{n}.png') for n in range(3)]
 
     def __init__(self, game, type, sound):
         super().__init__()
@@ -62,11 +68,22 @@ class Alien(Sprite):
         # self.timer_normal = Timer(image_list=self.alien_images)   
         # self.timer_normal = Timer(image_list=self.alien_types[type])
                       
+<<<<<<< HEAD
         self.timer_normal = Alien.alien_timers[type]              
         self.timer_explosion = Timer(image_list=Alien.alien_explosion_images, is_loop=False)  
         self.timer = self.timer_normal           
 
 
+=======
+        self.timer_normal = Alien.alien_timers[type]
+        if type == 0:              
+            self.timer_explosion = Timer(image_list=Alien.alien_explosion_images0, is_loop=False)
+        if type == 1:              
+            self.timer_explosion = Timer(image_list=Alien.alien_explosion_images1, is_loop=False)  
+        if type == 2:              
+            self.timer_explosion = Timer(image_list=Alien.alien_explosion_images2, is_loop=False)    
+        self.timer = self.timer_normal                                    
+>>>>>>> 9a0e971e113be9b2caf2f9174cb24d10f2b6c5ba
 
     def check_edges(self): 
         screen_rect = self.screen.get_rect()
