@@ -62,6 +62,8 @@ class Game:
     def play(self):
         self.sound.play_bg()
         while self.stats.game_active == False:  
+            self.screen.fill((0,0,0))
+            self.screen.blit(self.background,(0,0))
             self.play_button.draw_button()
             gf.check_events(settings=self.settings, ship=self.ship, stats=self.stats, play_button = self.play_button)
             pg.display.flip()
