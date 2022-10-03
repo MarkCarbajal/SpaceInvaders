@@ -1,3 +1,4 @@
+from pygame import mixer
 class Settings():
     """A class to store all settings for Alien Invasion."""
 
@@ -13,9 +14,13 @@ class Settings():
         self.laser_height = 32  #
         self.laser_color = 255, 0, 0
         self.lasers_every = 80           # change to 1 to see faster lasers
-
-        self.aliens_shoot_every = 120    # about every 2 seconds at 60 fps
+        self.ufo_speed = None
+        self.ufo_min_interval = 10000
+        
+        self.aliens_shoot_every = 120   
+        self.ufo_point_values = [50, 100, 150] # about every 2 seconds at 60 fps
         self.alien_points = 50
+        self.ufo_channel = mixer.Channel(3)
 
 # # TODO: set a ship_limit of 3
         self.ship_limit = 3         # total ships allowed in game before game over
@@ -28,6 +33,7 @@ class Settings():
         self.alien_speed_factor = 1
         self.ship_speed_factor = 1
         self.laser_speed_factor = 1
+        self.ufo_speed = self.alien_speed_factor * 2
 
     def increase_speed(self):
         scale = self.speedup_scale
