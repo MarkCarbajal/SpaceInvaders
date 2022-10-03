@@ -19,6 +19,7 @@ class Button():
         self.spriteimage1 = pg.image.load("images/alien__00.png")
         self.spriteimage2 = pg.image.load("images/alien__10.png")
         self.spriteimage3 = pg.image.load("images/alien__20.png")
+        self.spriteimage4 = pg.image.load("images/alien__30.png")
         self.shipimage = pg.transform.rotozoom(pg.image.load('images/ship.png'), 0, 3.0)
         
 
@@ -53,7 +54,10 @@ class Button():
         self.screen.blit(self.msg_image, self.msg_image_rect)
 
         self.text1 = self.textfont.render("Space Invaders", 1, (25,229,59))
-        self.screen.blit(self.text1, (175, 200))
+        self.screen.blit(self.text1, (175, 150))
+
+        self.text1 = self.textfont2.render("= ???", 1, (210,210,210))
+        self.screen.blit(self.text1, (415, 285))
 
         self.text1 = self.textfont2.render("= 50 Points", 1, (210,210,210))
         self.screen.blit(self.text1, (415, 350))
@@ -74,6 +78,7 @@ class Button():
         self.screen.blit(self.spriteimage1, (350,350))
         self.screen.blit(self.spriteimage2, (350,425))
         self.screen.blit(self.spriteimage3, (350,500))
+        self.screen.blit(self.spriteimage4, (350,285))
         self.screen.blit(self.shipimage, (850,450))
         self.screen.blit(self.high_score_image, self.high_score_rect)
         
