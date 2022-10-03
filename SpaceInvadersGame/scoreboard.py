@@ -28,11 +28,15 @@ class Scoreboard:
         self.prep_score()
         self.prep_high_score()
 
-    def increment_score(self, type): 
+    def increment_score(self, type):
+        current_addition =  -1   # only used for ufo
         self.score += 50 if type==0 else 0 #self.settings.alien_points
         self.score += 25 if type==1 else 0
         self.score += 10 if type==2 else 0
         self.score += choice([75,100,150]) if type==3 else 0
+        if type == 3:
+            current_addition = choice([75,100,150])
+            self.score += current_addition
         self.prep_score()
         #if stats.score > stats.high_score:
            # stats.high_score = stats.score
@@ -44,6 +48,7 @@ class Scoreboard:
             self.prep_high_score()
         else:
             self.stats.update_highscore()
+        return current_addition
 
     def prep_high_score(self):
         high_score = int(round(self.stats.high_score, -1))
