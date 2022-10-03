@@ -25,7 +25,7 @@ class Game:
         self.sound = Sound(bg_music="sounds/startrek.wav")
         self.stats = GameStats(self.settings)
         self.scoreboard = Scoreboard(game=self)  
-        self.Ufo = Ufo(self.settings, self.screen, self.sound)
+        self.Ufo = Ufo(self.settings, self.screen)
         self.background = pg.image.load("images/stars.png").convert()
         
 
