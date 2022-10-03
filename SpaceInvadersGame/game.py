@@ -49,7 +49,7 @@ class Game:
         self.ship.reset()
         self.aliens.reset()
         self.sound.reset()
-        self.scoreboard.reset()
+        #self.scoreboard.reset()
         self.Ufo.reset()
 
 

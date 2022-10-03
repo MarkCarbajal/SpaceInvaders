@@ -18,7 +18,7 @@ class Ufo(Sprite):
         self.settings = settings
         self.possible_scores = settings.ufo_point_values
         self.score = None
-        self.run_at = random.randint(0,1000)  #10000
+        self.run_at = random.randint(0,10000)  #10000
         self.run_count = 0
         self.sb = game.scoreboard
 
@@ -40,7 +40,7 @@ class Ufo(Sprite):
         # initial position, speed/direction
         self.speed = settings.ufo_speed * (choice([-1, 1]))
         self.rect.x = 0 if self.speed > 0 else settings.screen_width
-        self.rect.y = settings.screen_height * 0.8 
+        self.rect.y = settings.screen_height * 0.05 
 
         self.dying = self.dead = False
 
@@ -84,7 +84,7 @@ class Ufo(Sprite):
     def reset(self):
         self.speed = self.settings.ufo_speed * (choice([-1, 1]))
         self.rect.x = 0 if self.speed > 0 else self.settings.screen_width
-        self.rect.y = self.settings.screen_height * 0.8
+        self.rect.y = self.settings.screen_height * 0.05
         self.run_at = random.randint(0,1000)  #10000
         self.run_count = 0
         self.dying = self.dead = False
@@ -93,11 +93,11 @@ class Ufo(Sprite):
         self.image =  pg.image.load('images/alien__30.png')
 
     def update(self):
-        #self.run_count += 1
+        self.run_count += 1
         #self.rect.x = 0
-        #if self.run_at <= self.run_count:
-            #self.rect.x += self.speed
-        self.rect.x += self.speed
+        if self.run_at <= self.run_count:
+            self.rect.x += self.speed
+        #self.rect.x += self.speed
 
     def blitme(self):
         if self.run_at <= self.run_count:
