@@ -26,6 +26,7 @@ class Game:
         self.stats = GameStats(self.settings)
         self.scoreboard = Scoreboard(game=self)  
         self.Ufo = Ufo(self.settings, self.screen, self.sound)
+        self.background = pg.image.load("images/stars.png").convert()
         
 
         self.ship_lasers = Lasers(settings=self.settings, type=LaserType.SHIP)
@@ -67,7 +68,8 @@ class Game:
 
         while self.stats.game_active == True:     # at the moment, only exits in gf.check_events if Ctrl/Cmd-Q pressed
             gf.check_events(settings=self.settings, ship=self.ship, stats=self.stats, play_button = self.play_button)
-            self.screen.fill(self.settings.bg_color)
+            self.screen.fill((0,0,0))
+            self.screen.blit(self.background,(0,0))
             self.ship.update()
             self.aliens.update()
             self.Ufo.update()

@@ -17,7 +17,7 @@ class Scoreboard:
         
         self.screen_rect = self.screen.get_rect()
 
-        self.text_color = (30, 30, 30)
+        self.text_color = (255, 255, 255)
         self.font = pg.font.SysFont(None, 48)
 
         self.score_image = None 

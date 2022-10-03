@@ -7,7 +7,7 @@ class Settings():
         # Screen settings
         self.screen_width = 1200
         self.screen_height = 800
-        self.bg_color = (150, 150, 150)
+        self.bg_color = (0,0,0)
         
 # # TODO: test laser with a really wide laser
         self.laser_width = 32  #
