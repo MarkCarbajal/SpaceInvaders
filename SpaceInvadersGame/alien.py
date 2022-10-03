@@ -211,6 +211,11 @@ class Aliens:
             for barrier in collisions:
                 barrier.hit()
 
+        collisions = pg.sprite.spritecollide(self.Ufo, self.ship_lasers, True)
+        if collisions:
+            print("ufo is hit")
+            self.Ufo.hit()
+
         # aliens_lasers collide with barrier?
 
         # ship_lasers collide with barrier?
