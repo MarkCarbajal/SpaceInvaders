@@ -5,7 +5,7 @@ from random import choice
 
 class Ufo(pygame.sprite.Sprite):
     """Represents a UFO meant to move across the screen at random intervals"""
-    def __init__(self, settings, screen, sound=True):
+    def __init__(self, settings, screen):
         super().__init__()
         # screen, settings, score values
         self.screen = screen
@@ -28,12 +28,6 @@ class Ufo(pygame.sprite.Sprite):
         self.last_frame = None
         self.wait_interval = 500
 
-        # sound
-        self.entrance_sound = pygame.mixer.Sound('sounds/photon_torpedo.wav')
-        self.death_sound = pygame.mixer.Sound('sounds/photon_torpedo.wav')
-        self.entrance_sound.set_volume(0.6)
-        self.channel = settings.ufo_channel
-
         # initial position, speed/direction
         self.speed = settings.ufo_speed * (choice([-1, 1]))
         self.rect.x = 0 if self.speed > 0 else settings.screen_width
@@ -42,11 +36,7 @@ class Ufo(pygame.sprite.Sprite):
         # death flag
         self.dead = False
 
-        if sound:
-            self.channel.play(self.entrance_sound, loops=-1)
-
     def kill(self):
-        self.channel.stop()
         super().kill()
 
     def check_edges(self): 
@@ -54,8 +44,6 @@ class Ufo(pygame.sprite.Sprite):
         return self.rect.right >= screen_rect.right or self.rect.left <= 0
 
     def begin_death(self):
-        self.channel.stop()
-        self.channel.play(self.death_sound)
         self.dead = True
         self.death_index = 0
         self.image = self.death_frames[self.death_index]
