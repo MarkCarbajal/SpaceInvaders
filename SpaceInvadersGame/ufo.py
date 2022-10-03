@@ -1,5 +1,6 @@
 import pygame
 from pygame.sysfont import SysFont
+import random
 from random import choice
 
 
@@ -12,6 +13,8 @@ class Ufo(pygame.sprite.Sprite):
         self.settings = settings
         self.possible_scores = settings.ufo_point_values
         self.score = None
+        self.run_at = random.randint(0,10000)
+        self.run_count = 0
 
         # images, score text
         self.image = pygame.image.load('images/alien__30.png')
@@ -63,24 +66,32 @@ class Ufo(pygame.sprite.Sprite):
             self.dying = True 
             self.sb.increment_score(self.type)
 
+    def reset(self):
+        print("hi")
+        #to implement
+
     def update(self):
-        if not self.dead:
-            self.rect.x += self.speed
-            if self.speed > 0 and self.rect.left > self.settings.screen_width:
-                self.kill()
-            elif self.rect.right < 0:
-                self.kill()
-        else:
-            time_test = pygame.time.get_ticks()
-            if abs(time_test - self.last_frame) > self.wait_interval:
-                self.last_frame = time_test
-                self.death_index += 1
-                if self.death_index >= len(self.death_frames):
+        self.run_count += 1
+        #self.rect.x = 0
+        if self.run_at <= self.run_count:
+            if not self.dead:
+                self.rect.x += self.speed
+                if self.speed > 0 and self.rect.left > self.settings.screen_width:
                     self.kill()
-                else:
-                    self.image = self.death_frames[self.death_index]
-                    self.wait_interval += 500
+                elif self.rect.right < 0:
+                    self.kill()
+            else:
+                time_test = pygame.time.get_ticks()
+                if abs(time_test - self.last_frame) > self.wait_interval:
+                    self.last_frame = time_test
+                    self.death_index += 1
+                    if self.death_index >= len(self.death_frames):
+                        self.kill()
+                    else:
+                        self.image = self.death_frames[self.death_index]
+                        self.wait_interval += 500
 
     def blitme(self):
-        self.screen.blit(self.image, self.rect)
+        if self.run_at <= self.run_count:
+            self.screen.blit(self.image, self.rect)
         

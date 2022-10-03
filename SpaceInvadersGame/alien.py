@@ -101,13 +101,14 @@ class Alien(Sprite):
 
 
 class Aliens:
-    def __init__(self, game, sound, barriers): 
+    def __init__(self, game, sound, barriers, Ufo): 
         self.model_alien = Alien(game=game, type=1, sound=sound)
         self.game = game
         self.sb = game.scoreboard
         self.aliens = Group()
         self.sound = sound
         self.barriers = barriers
+        self.Ufo = Ufo
 
         # self.ship_lasers = game.ship.lasers.lasers    # a laser Group
         # self.aliens_lasers = Lasers(settings=game.settings)
@@ -200,12 +201,12 @@ class Aliens:
         if collisions:
             self.ship.hit()
 
-        collisions = pg.sprite.groupcollide(self.barriers.barriers, self.ship_lasers, False, True)  
+        collisions = pg.sprite.groupcollide(self.barriers.barriers, self.ship_lasers, True, True)  
         if collisions:
             for barrier in collisions:
                 barrier.hit()
 
-        collisions = pg.sprite.groupcollide(self.barriers.barriers, self.aliens_lasers.lasers, False, True)  
+        collisions = pg.sprite.groupcollide(self.barriers.barriers, self.aliens_lasers.lasers, True, True)  
         if collisions:
             for barrier in collisions:
                 barrier.hit()

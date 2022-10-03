@@ -34,7 +34,7 @@ class Game:
         
         self.barriers = Barriers(game=self)
         self.ship = Ship(game=self)
-        self.aliens = Aliens(game=self, sound=self.sound, barriers=self.barriers)
+        self.aliens = Aliens(game=self, sound=self.sound, barriers=self.barriers, Ufo=self.Ufo)
         #self.ufos = ufos(game=self, sound=self.sound, barriers=self.barriers)
         
         self.settings.initialize_speed_settings()
@@ -50,6 +50,7 @@ class Game:
         self.aliens.reset()
         self.sound.reset()
         self.scoreboard.reset()
+        self.Ufo.reset()
 
 
     def game_over(self):
