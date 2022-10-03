@@ -12,7 +12,7 @@ class Button():
        #Initialize button attributes.
         self.screen = screen
         self.screen_rect = screen.get_rect()
-        self.textfont = pg.font.Font("fonts/BungeeSpice-Regular.ttf", 100)
+        self.textfont = pg.font.Font('fonts/BungeeSpice-Regular.ttf', 100)
         self.textfont2 = pg.font.Font("fonts/BungeeSpice-Regular.ttf", 50)
 
         #Load sprite images

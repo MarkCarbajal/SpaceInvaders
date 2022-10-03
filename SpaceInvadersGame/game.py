@@ -9,6 +9,7 @@ from sound import Sound
 from scoreboard import Scoreboard
 from barrier import Barriers
 from game_stats import GameStats
+from ufo import Ufo
 from button import Button
 import sys
 
@@ -24,6 +25,8 @@ class Game:
         self.sound = Sound(bg_music="sounds/startrek.wav")
         self.stats = GameStats(self.settings)
         self.scoreboard = Scoreboard(game=self)  
+        self.Ufo = Ufo(self.settings, self.screen, self.sound)
+        self.background = pg.image.load("images/stars.png").convert()
         
 
         self.ship_lasers = Lasers(settings=self.settings, type=LaserType.SHIP)
@@ -32,6 +35,8 @@ class Game:
         self.barriers = Barriers(game=self)
         self.ship = Ship(game=self)
         self.aliens = Aliens(game=self, sound=self.sound, barriers=self.barriers)
+        #self.ufos = ufos(game=self, sound=self.sound, barriers=self.barriers)
+        
         self.settings.initialize_speed_settings()
 
         self.play_button = Button(self.settings, self.screen, "Play")
@@ -63,9 +68,13 @@ class Game:
 
         while self.stats.game_active == True:     # at the moment, only exits in gf.check_events if Ctrl/Cmd-Q pressed
             gf.check_events(settings=self.settings, ship=self.ship, stats=self.stats, play_button = self.play_button)
-            self.screen.fill(self.settings.bg_color)
+            self.screen.fill((0,0,0))
+            self.screen.blit(self.background,(0,0))
             self.ship.update()
             self.aliens.update()
+            self.Ufo.update()
+            self.Ufo.blitme()
+            #self.ufos.update()
             self.barriers.update()
             # self.lasers.update()
             self.scoreboard.update()
