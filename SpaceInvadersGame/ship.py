@@ -10,7 +10,7 @@ from scoreboard import Scoreboard
 
 class Ship(Sprite):
     ship_images = [pg.transform.rotozoom(pg.image.load(f'images/ship.png'), 0, 1.0)]
-    ship_explosion_images = [pg.transform.rotozoom(pg.image.load(f'images/ship_explode{n}.png'), 0, 1.0) for n in range(6)]
+    ship_explosion_images = [pg.transform.rotozoom(pg.image.load(f'images/ship_exp{n}.png'), 0, 1.0) for n in range(7)]
 
     def __init__(self, game):
         super().__init__()
